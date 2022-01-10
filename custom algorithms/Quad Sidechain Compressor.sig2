@@ -1,0 +1,175 @@
+HEADM|adc|ninputs=8|noutputs=8|name=quad comp|tag=0|nkids=4|out1=mix:7-out|out2=mix:8-out|out3=mix:9-out|out4=mix:10-out|out5=adc-in5|out6=adc-in6|out7=adc-in7|out8=adc-in8|kids1=GRmeters-obj|kids2=cmenu1-obj|kids3=adc-nullobj|kids4=Sidechain-obj
+MENUPAGE|cmenu1|name=Compressors|tag=comp#1|nsubuos=8|obj1=DryWetMix-obj|obj2=gain-obj|obj3=threshold-obj|obj4=knee-obj|obj5=attack-obj|obj6=decay-obj|obj7=Lookahead-obj|obj8=ratio-obj
+SKNOB3|threshold|statement=THRESH: %5.1f dB|name=0|type=0|res=0.1|default=-22.1|ctrlin=threshold-out|min=-80|max=0|merge=0
+SKNOB3|knee|statement=KNEE: %5.1f dB|name=0|type=0|res=0.1|default=12|ctrlin=knee-out|min=0|max=24|merge=0
+SKNOB3|gain|statement=makeupgain: %5.1f dB|name=0|type=0|res=0.1|default=2|ctrlin=gain-out|min=0|max=24|merge=0
+COMPRESSOR|comp1|in=delay:1-out|sidechain=scale:1-out|threshcntl=threshold-out|kneecntl=knee-out|ratiocntl=ratio-out|gaincntl=gain-out|attackcntl=c_multiply:1-out|decaycntl=c_multiply:2-out|declickXfade=0|processoff=0
+A_TO_C|c_c1|in=comp1-loggain
+C_MULTIPLY|mirror1|in1=c_c1-out|in2=-1
+COMPRESSOR|comp1~1|in=delay:2-out|sidechain=scale:2-out|threshcntl=threshold-out|kneecntl=knee-out|ratiocntl=ratio-out|gaincntl=gain-out|attackcntl=c_multiply:1-out|decaycntl=c_multiply:2-out|declickXfade=0|processoff=0
+A_TO_C|c_c1~1|in=comp1~1-loggain
+C_MULTIPLY|mirror1~1|in1=c_c1~1-out|in2=-1
+TEXTKNOB|sidechain|statement=sidechain: %s|name=detection|nchoices=3|default=0|choices1=in 1, 2, 3, 4|choices2=in 5, 6, 7, 8|choices3=out 1, 2, 3, 4
+METER|meter:1|in=mirror1-out|minimum=0.0|maximum=0.2|name=Channel 1|tag=meter
+METER|meter:2|in=mirror1~1-out|minimum=0.0|maximum=0.2|name=Channel 2|tag=meter
+ADD|AddSides:1|clipvalue=10000|in1=abs:2-out|in2=abs:4-out
+TAPKNOB|attack|statement=ATTACK: %5.1f ms|name=0|min=0.00|max=1000.00|steps=256|default=12.50|taper=2|alpha=1
+TAPKNOB|decay|statement=DECAY: %5.1f ms|name=0|min=0|max=3000|steps=256|default=1020|taper=2|alpha=1
+ISWITCH|iswitch:1|numins=3|select=sidechain-out|in1=adc-in1|in2=adc-in5|in3=mix:7-out
+ISWITCH|iswitch:2|numins=3|select=sidechain-out|in1=adc-in2|in2=adc-in6|in3=mix:8-out
+PERCENTKNOB|across|statement=Link Across: %3.0f%%|name=0|min=0|max=100|res=1|default=0
+TAPKNOB|ratio|statement=RATIO: %4.1f:1|name=0|min=1|max=100|steps=256|default=1.2|taper=2|alpha=1
+C_MULTIPLY|c_multiply:1|in1=attack-out|in2=0.001
+C_MULTIPLY|c_multiply:2|in1=decay-out|in2=0.001
+ABS|abs:1|in=iswitch:8-out
+ABS|abs:2|in=iswitch:7-out
+FILTER|filter:5|clipvalue=10000|in=iswitch:1-out|freq=hicut1-out|qfactor=1|type=0
+FILTER|filter:6|clipvalue=10000|in=filter:5-out|freq=locut1-out|qfactor=1|type=2
+FILTER|filter:7|clipvalue=10000|in=iswitch:2-out|freq=hicut1-out|qfactor=1|type=0
+FILTER|filter:8|clipvalue=10000|in=filter:7-out|freq=locut1-out|qfactor=1|type=2
+TEXTKNOB|SidechainCuts|statement=CUTS: %s|name=0|nchoices=2|default=0|choices1=bypass|choices2=active
+ISWITCH|iswitch:7|numins=2|select=SidechainCuts-out|in1=iswitch:1-out|in2=filter:6-out
+ISWITCH|iswitch:8|numins=2|select=SidechainCuts-out|in1=iswitch:2-out|in2=filter:8-out
+TAPKNOB|locut1|statement=LOW CUT: %5.0f Hz|name=0|min=10|max=20000|steps=256|default=100|taper=2|alpha=1
+TAPKNOB|hicut1|statement=HIGH CUT: %5.0f Hz|name=0|min=10|max=20000|steps=256|default=16000|taper=2|alpha=1
+MIX|mix:7|time_constant=20|clipvalue=10000|in1=comp1-out|in2=delay:1-out|amp1=DryWetMix-out|amp2=c_abs:7-output
+C_ABS|c_abs:7|input=c_adder:8-out
+C_ADDER|c_adder:8|ninputs=2|in1=DryWetMix-out|in2=-1
+MIX|mix:8|time_constant=20|clipvalue=10000|in1=comp1~1-out|in2=delay:2-out|amp1=DryWetMix-out|amp2=c_abs:8-output
+C_ABS|c_abs:8|input=c_adder:9-out
+C_ADDER|c_adder:9|ninputs=2|in1=DryWetMix-out|in2=-1
+PERCENTKNOB|DryWetMix|statement=dry/wet mix: %3.0f%%|name=0|min=0|max=100|res=1|default=100
+DELAY|delay:1|maxdelay=10|in=adc-in1|delayamt=Lookahead-out
+TAPKNOB|Lookahead|statement=LOOKAHEAD: %3.1f ms|name=0|min=0.00|max=10.00|steps=256|default=0|taper=2|alpha=1
+DELAY|delay:2|maxdelay=10|in=adc-in2|delayamt=Lookahead-out
+MENUPAGE|GRmeters|name=gain reductions|tag=0|nsubuos=4|obj1=meter:1-obj|obj2=meter:2-obj|obj3=meter:3-obj|obj4=meter:4-obj
+A_TO_C|c_c1:1|in=comp1:1-loggain
+C_MULTIPLY|mirror1:1|in1=c_c1:1-out|in2=-1
+A_TO_C|c_c1~1:1|in=comp1~1:1-loggain
+C_MULTIPLY|mirror1~1:1|in1=c_c1~1:1-out|in2=-1
+METER|meter:3|in=mirror1:1-out|minimum=0.0|maximum=0.2|name=Channel 3|tag=meter
+METER|meter:4|in=mirror1~1:1-out|minimum=0.0|maximum=0.2|name=Channel 4|tag=meter
+MIX|mix:9|time_constant=20|clipvalue=10000|in1=comp1:1-out|in2=delay:3-out|amp1=DryWetMix-out|amp2=c_abs:9-output
+C_ABS|c_abs:9|input=c_adder:10-out
+C_ADDER|c_adder:10|ninputs=2|in1=DryWetMix-out|in2=-1
+MIX|mix:10|time_constant=20|clipvalue=10000|in1=comp1~1:1-out|in2=delay:4-out|amp1=DryWetMix-out|amp2=c_abs:10-output
+C_ABS|c_abs:10|input=c_adder:11-out
+C_ADDER|c_adder:11|ninputs=2|in1=DryWetMix-out|in2=-1
+COMPRESSOR|comp1:1|in=delay:3-out|sidechain=scale:3-out|threshcntl=-40|kneecntl=0|ratiocntl=10|gaincntl=0|attackcntl=0.01|decaycntl=0.01|declickXfade=0|processoff=0
+COMPRESSOR|comp1~1:1|in=delay:4-out|sidechain=scale:4-out|threshcntl=-40|kneecntl=0|ratiocntl=10|gaincntl=0|attackcntl=0.01|decaycntl=0.01|declickXfade=0|processoff=0
+ADD|AddSides:2|clipvalue=10000|in1=abs:1-out|in2=abs:3-out
+ISWITCH|iswitch:3|numins=3|select=sidechain-out|in1=adc-in3|in2=adc-in7|in3=mix:9-out
+ISWITCH|iswitch:4|numins=3|select=sidechain-out|in1=adc-in4|in2=adc-in8|in3=mix:10-out
+ABS|abs:3|in=iswitch:10-out
+ABS|abs:4|in=iswitch:9-out
+FILTER|filter:9|clipvalue=10000|in=iswitch:3-out|freq=1000|qfactor=1|type=0
+FILTER|filter:10|clipvalue=10000|in=filter:9-out|freq=1000|qfactor=1|type=2
+FILTER|filter:11|clipvalue=10000|in=iswitch:4-out|freq=1000|qfactor=1|type=0
+FILTER|filter:12|clipvalue=10000|in=filter:11-out|freq=1000|qfactor=1|type=2
+ISWITCH|iswitch:9|numins=2|select=SidechainCuts-out|in1=iswitch:3-out|in2=filter:10-out
+ISWITCH|iswitch:10|numins=2|select=SidechainCuts-out|in1=iswitch:4-out|in2=filter:12-out
+DELAY|delay:3|maxdelay=10|in=adc-in3|delayamt=Lookahead-out
+DELAY|delay:4|maxdelay=10|in=adc-in4|delayamt=Lookahead-out
+MIXN|mixn:1|ninputs=3|time_constant=20|clipvalue=10000|in1=abs:2-out|in2=AddSides:2-out|in3=abs:4-out|amp1=1|amp2=adjacent-out|amp3=across-out
+MIXN|mixn:2|ninputs=3|time_constant=20|clipvalue=10000|in1=abs:1-out|in2=AddSides:1-out|in3=abs:3-out|amp1=1|amp2=adjacent-out|amp3=across-out
+MIXN|mixn:3|ninputs=3|time_constant=20|clipvalue=10000|in1=abs:4-out|in2=AddSides:2-out|in3=abs:2-out|amp1=1|amp2=adjacent-out|amp3=across-out
+MIXN|mixn:4|ninputs=3|time_constant=20|clipvalue=10000|in1=abs:3-out|in2=AddSides:1-out|in3=abs:1-out|amp1=1|amp2=adjacent-out|amp3=across-out
+PERCENTKNOB|adjacent|statement=Link Beside: %3.0f%%|name=0|min=0|max=100|res=1|default=0
+C_ADDER|AddKnobs|ninputs=2|in1=Times2-out|in2=across-out
+C_ADDER|Add1|ninputs=2|in1=AddKnobs-out|in2=1
+SCALE|scale:1|in=mixn:1-out|amp=1dividedBy-out
+C_DIVIDE|1dividedBy|in1=1|in2=Add1-out
+SCALE|scale:2|in=mixn:2-out|amp=1dividedBy-out
+SCALE|scale:3|in=mixn:3-out|amp=1dividedBy-out
+SCALE|scale:4|in=mixn:4-out|amp=1dividedBy-out
+MENUPAGE|Sidechain|name=Sidechains|tag=comp#1|nsubuos=6|obj1=sidechain-obj|obj2=adjacent-obj|obj3=across-obj|obj4=SidechainCuts-obj|obj5=locut1-obj|obj6=hicut1-obj
+C_MULTIPLY|Times2|in1=2|in2=adjacent-out
+TAIL|tail
+--
+adc| ;=30,30,100,0
+cmenu1| ;=2632,1984,100,0
+threshold| ;=2448,1776,100,0
+knee| ;=2448,1912,100,0
+gain| ;=2448,2176,100,0
+comp1| ;=1488,1032,100,0
+c_c1| ;=2520,624,100,0
+mirror1| ;=2624,624,100,0
+comp1~1| ;=1488,1272,100,0
+c_c1~1| ;=2520,720,100,0
+mirror1~1| ;=2624,720,100,0
+sidechain| ;=1944,1808,100,0
+meter:1| ;=2728,624,100,0
+meter:2| ;=2728,720,100,0
+AddSides:1| ;=696,2192,100,0
+attack| ;=2448,2304,100,0
+decay| ;=2448,2400,100,0
+iswitch:1| ;=208,336,100,0
+iswitch:2| ;=208,472,100,0
+across| ;=1312,2712,100,0
+ratio| ;=2448,2056,100,0
+c_multiply:1| ;=2352,2304,100,0
+c_multiply:2| ;=2352,2400,100,0
+abs:1| ;=456,2400,100,0
+abs:2| ;=456,2304,100,0
+filter:5| ;=72,1248,100,0
+filter:6| ;=192,1248,100,0
+filter:7| ;=72,1376,100,0
+filter:8| ;=192,1376,100,0
+SidechainCuts| ;=320,1712,100,0
+iswitch:7| ;=320,1208,100,0
+iswitch:8| ;=320,1336,100,0
+locut1| ;=2296,2208,100,0
+hicut1| ;=2184,2208,100,0
+mix:7| ;=1640,552,100,0
+c_abs:7| ;=1936,640,100,0
+c_adder:8| ;=1832,640,100,0
+mix:8| ;=1640,688,100,0
+c_abs:8| ;=1936,744,100,0
+c_adder:9| ;=1832,744,100,0
+DryWetMix| ;=1704,1096,100,0
+delay:1| ;=1208,904,100,0
+Lookahead| ;=1016,1016,100,0
+delay:2| ;=1208,1000,100,0
+GRmeters| ;=2848,752,100,0
+c_c1:1| ;=2520,816,100,0
+mirror1:1| ;=2624,816,100,0
+c_c1~1:1| ;=2520,912,100,0
+mirror1~1:1| ;=2624,912,100,0
+meter:3| ;=2728,816,100,0
+meter:4| ;=2728,912,100,0
+mix:9| ;=1640,824,100,0
+c_abs:9| ;=1936,848,100,0
+c_adder:10| ;=1832,848,100,0
+mix:10| ;=1640,960,100,0
+c_abs:10| ;=1936,952,100,0
+c_adder:11| ;=1832,952,100,0
+comp1:1| ;=1488,1512,100,0
+comp1~1:1| ;=1488,1752,100,0
+AddSides:2| ;=680,2840,100,0
+iswitch:3| ;=208,616,100,0
+iswitch:4| ;=208,760,100,0
+abs:3| ;=456,2592,100,0
+abs:4| ;=456,2496,100,0
+filter:9| ;=72,1504,100,0
+filter:10| ;=192,1504,100,0
+filter:11| ;=72,1632,100,0
+filter:12| ;=192,1632,100,0
+iswitch:9| ;=320,1464,100,0
+iswitch:10| ;=320,1592,100,0
+delay:3| ;=1208,1096,100,0
+delay:4| ;=1208,1192,100,0
+mixn:1| ;=1008,2248,100,0
+mixn:2| ;=1008,2424,100,0
+mixn:3| ;=1008,2600,100,0
+mixn:4| ;=1008,2776,100,0
+adjacent| ;=1312,2448,100,0
+AddKnobs| ;=816,1912,100,0
+Add1| ;=960,1912,100,0
+scale:1| ;=1312,1888,100,0
+1dividedBy| ;=1104,1912,100,0
+scale:2| ;=1312,1984,100,0
+scale:3| ;=1312,2080,100,0
+scale:4| ;=1312,2176,100,0
+Sidechain| ;=2632,1808,100,0
+Times2| ;=664,1976,100,0
+tail|

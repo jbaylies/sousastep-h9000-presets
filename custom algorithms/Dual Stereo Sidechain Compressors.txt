@@ -1,0 +1,15 @@
+Demo: https://www.youtube.com/watch?v=1Yl6BncAnqE
+
+SIDECHAIN: "in 1+2" is feedforward, and "out 1+2" is feedback. Further explanation here: https://sonicscoop.com/2018/11/07/feedback-vs-feed-forward-compression-differences-need-know/
+
+STEREO LINK: At 0% the sidechain channels are independent. At 100% the sidechain channels are summed, and trimmed 3db. Absolute values are also involved.. More discussion here: https://www.kvraudio.com/forum/viewtopic.php?f=33&t=466755
+
+S.C. CUTS: Filters the sidechain signal.
+
+RMS: Smooths the sidechain.
+
+RMS TIME: Sets the length of the RMS averaging period.
+
+Outputs 3+4 and 7+8 are just inputs 3+4 and 7+8 passed through unprocessed.
+
+SWAP allows A/B testing. Note: Does not swap I/O 3+4 and 7+8.

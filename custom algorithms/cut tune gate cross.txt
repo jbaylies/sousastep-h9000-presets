@@ -1,0 +1,5 @@
+Modification of algorithm #1510 Auto Pitch Correct for low-pitched instruments such as tuba.
+
+high cut > auto pitch correct > gate > crossover filter
+
+mono in 1, lows out 1, highs out 2

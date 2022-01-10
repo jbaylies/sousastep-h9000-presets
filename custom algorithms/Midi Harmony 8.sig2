@@ -1,0 +1,209 @@
+HEADM|adc|ninputs=2|noutputs=2|name=Midi Harmony|tag=0|nkids=7|out1=mix-left|out2=mix-right|kids1=SHIFTmenu-obj|kids2=mmenu-obj|kids3=emenu-obj|kids4=LFOmenu-obj|kids5=delaymenu-obj|kids6=LFOmenu:1-obj|kids7=calmenu-obj
+ADD|l+r|clipvalue=1|in1=adc-in1|in2=adc-in2
+MENUPAGE|LFOmenu|name=LFO Mod Amounts|tag=lfo|nsubuos=8|obj1=modamt:1-obj|obj2=modamt:2-obj|obj3=modamt:3-obj|obj4=modamt:4-obj|obj5=modamt:5-obj|obj6=modamt:6-obj|obj7=modamt:7-obj|obj8=modamt:8-obj
+KNOB|freq|statement=freq : %6.3f Hz|name=freq|min=0|max=40|res=0.001|default=4
+PERCENTKNOB|duty|statement=duty : %3.1f %%|name=mod|min=0|max=100|res=1|default=50
+TEXTKNOB|wave|statement=shape: %s|name=waveform|nchoices=8|default=0|choices1=sine|choices2=triangle|choices3=square|choices4=peak|choices5=warp sine|choices6=warp tri|choices7=half sine|choices8=half peak
+LFO|lfo|mod=adc-null|freq=freq-out|modamt=adc-zero|wave=wave-out|dutycycle=duty-out|polarity=1
+KNOB|modamt:1|statement=modamt1: %5.0f cnts|name=0|min=-2400.0001|max=2400.0001|res=1|default=0
+KNOB|modamt:2|statement=modamt2: %5.0f cnts|name=0|min=-2400.0001|max=2400.0001|res=1|default=0
+KNOB|modamt:3|statement=modamt3: %5.0f cnts|name=0|min=-2400.0001|max=2400.0001|res=1|default=0
+KNOB|modamt:4|statement=modamt4: %5.0f cnts|name=0|min=-2400.0001|max=2400.0001|res=1|default=0
+MENUPAGE|SHIFTmenu|name=shift values|tag=shift|nsubuos=16|obj1=shift:1-obj|obj2=shift:2-obj|obj3=shift:3-obj|obj4=shift:4-obj|obj5=shift:5-obj|obj6=shift:6-obj|obj7=shift:7-obj|obj8=shift:8-obj|obj9=monitor:1-obj|obj10=monitor:2-obj|obj11=monitor:3-obj|obj12=monitor:4-obj|obj13=monitor:5-obj|obj14=monitor:6-obj|obj15=monitor:7-obj|obj16=monitor:8-obj
+KNOB|shift:1|statement=detune1: %5.0f cnts|name=0|min=-4800.0002|max=4800.0002|res=1|default=0
+KNOB|shift:2|statement=detune2: %5.0f cnts|name=0|min=-4800.0002|max=4800.0002|res=1|default=0
+KNOB|shift:3|statement=detune3: %5.0f cnts|name=0|min=-4800.0002|max=4800.0002|res=1|default=0
+KNOB|shift:4|statement=detune4: %5.0f cnts|name=0|min=-4800.0002|max=4800.0002|res=1|default=0
+MENUPAGE|delaymenu|name=delay params|tag=delays|nsubuos=8|obj1=delay:1-obj|obj2=delay:2-obj|obj3=delay:3-obj|obj4=delay:4-obj|obj5=delay:5-obj|obj6=delay:6-obj|obj7=delay:7-obj|obj8=delay:8-obj
+KNOB|delay:1|statement=delay1: %3.0f ms|name=0|min=0|max=600|res=1|default=0
+KNOB|delay:2|statement=delay2: %3.0f ms|name=0|min=0|max=600|res=1|default=0
+KNOB|delay:3|statement=delay3: %3.0f ms|name=0|min=0|max=600|res=1|default=0
+KNOB|delay:4|statement=delay4: %3.0f ms|name=0|min=0|max=600|res=1|default=0
+MIDINOTE|midinote|nvoices=8|channel=0|notemode=2|polymode=polymode-out|pressure=adc-zero|pitchbend=adc-zero
+KNOB|tuner|statement=tune   : %5.0f cnts|name=0|min=-100|max=100|res=1|default=0
+C_ADDER|c_adder:1|ninputs=3|in1=shift:1-out|in2=midinote-pitch1|in3=c_subtract:1-out
+C_ADDER|c_adder:2|ninputs=3|in1=shift:2-out|in2=midinote-pitch2|in3=c_subtract:1-out
+C_ADDER|c_adder:3|ninputs=3|in1=shift:3-out|in2=midinote-pitch3|in3=c_subtract:1-out
+C_ADDER|c_adder:4|ninputs=3|in1=shift:4-out|in2=midinote-pitch4|in3=c_subtract:1-out
+C_SWITCH|c_switch:1|ninputs=2|select=midinote-gate1|in1=adc-zero|in2=c_adder:1-out
+C_SWITCH|c_switch:2|ninputs=2|select=midinote-gate2|in1=adc-zero|in2=c_adder:2-out
+C_SWITCH|c_switch:3|ninputs=2|select=midinote-gate3|in1=adc-zero|in2=c_adder:3-out
+C_SWITCH|c_switch:4|ninputs=2|select=midinote-gate4|in1=adc-zero|in2=c_adder:4-out
+MONITOR|monitor:1|in=c_switch:1-out|statement=key1: %5.0f cnts|tag=mon
+MONITOR|monitor:2|in=c_switch:2-out|statement=key2: %5.0f cnts|tag=mon
+MONITOR|monitor:3|in=c_switch:3-out|statement=key3: %5.0f cnts|tag=mon
+MONITOR|monitor:4|in=c_switch:4-out|statement=key4: %5.0f cnts|tag=mon
+MENUPAGE|emenu|name=ADSR params|tag=adsr|nsubuos=8|obj1=adsr:1-obj|obj2=adsr:2-obj|obj3=adsr:3-obj|obj4=adsr:4-obj|obj5=adsr:5-obj|obj6=adsr:6-obj|obj7=adsr:7-obj|obj8=adsr:8-obj
+TEXTKNOB|mode|statement=adsr: %s|name=0|nchoices=2|default=1|choices1=disabled|choices2=enabled
+ISWITCH|iswitch1|numins=2|select=mode-out|in1=mshift-out1|in2=adsr:1-out
+ISWITCH|iswitch2|numins=2|select=mode-out|in1=mshift-out2|in2=adsr:2-out
+ISWITCH|iswitch3|numins=2|select=mode-out|in1=mshift-out3|in2=adsr:3-out
+ISWITCH|iswitch4|numins=2|select=mode-out|in1=mshift-out4|in2=adsr:4-out
+MENUPAGE|calmenu|name=calibration parms|tag=cal|nsubuos=6|obj1=minpitch-obj|obj2=xfade-obj|obj3=tuner-obj|obj4=polymode-obj|obj5=textblock:1-obj|obj6=mode-obj
+TEXTKNOB|minpitch|statement=lownote:    %s|name=0|nchoices=48|default=24|choices1=C0|choices2=C#0|choices3=D0|choices4=D#0|choices5=E0|choices6=F0|choices7=F#0|choices8=G0|choices9=G#0|choices10=A0|choices11=A#0|choices12=B0|choices13=C1|choices14=C#1|choices15=D1|choices16=D#1|choices17=E1|choices18=F1|choices19=F#1|choices20=G1|choices21=G#1|choices22=A1|choices23=A#1|choices24=B1|choices25=C2|choices26=C#2|choices27=D2|choices28=D#2|choices29=E2|choices30=F2|choices31=F#2|choices32=G2|choices33=G#2|choices34=A2|choices35=A#2|choices36=B2|choices37=C3|choices38=C#3|choices39=D3|choices40=D#3|choices41=E3|choices42=F3|choices43=F#3|choices44=G3|choices45=G#3|choices46=A3|choices47=A#3|choices48=B3
+KNOB|xfade|statement=xfade  :   %3.0f ms|name=0|min=0|max=100|res=1|default=10
+MULTISHIFT|mshift|lowlatencymode=0|maxdelay=2000|nvoices=8|in=l+r-out|minpitch=minpitch-out|gatelevel=adc-zero|xfadetime=xfade-out|mod1=lfo-out|mod2=lfo-out|mod3=lfo-out|mod4=lfo-out|mod5=lfo-out|mod6=lfo-out|mod7=lfo-out|mod8=lfo-out|shift1=c_adder:1-out|shift2=c_adder:2-out|shift3=c_adder:3-out|shift4=c_adder:4-out|shift5=c_adder:5-out|shift6=c_adder:6-out|shift7=c_adder:7-out|shift8=c_adder:8-out|modamt1=modamt:1-out|modamt2=modamt:2-out|modamt3=modamt:3-out|modamt4=modamt:4-out|modamt5=modamt:5-out|modamt6=modamt:6-out|modamt7=modamt:7-out|modamt8=modamt:8-out|delayamt1=delay:1-out|delayamt2=delay:2-out|delayamt3=delay:3-out|delayamt4=delay:4-out|delayamt5=delay:5-out|delayamt6=delay:6-out|delayamt7=delay:7-out|delayamt8=delay:8-out
+MENUPAGE|mmenu|name=mixer parms|tag=mixer|nsubuos=16|obj1=mix1-obj|obj2=mix2-obj|obj3=mix3-obj|obj4=mix4-obj|obj5=mix5-obj|obj6=mix6-obj|obj7=mix7-obj|obj8=mix8-obj|obj9=pan1-obj|obj10=pan2-obj|obj11=pan3-obj|obj12=pan4-obj|obj13=pan5-obj|obj14=pan6-obj|obj15=pan7-obj|obj16=pan8-obj
+KNOB|mix1|statement=level1: %4.0f dB|name=0|min=-100|max=0|res=1|default=0
+KNOB|mix2|statement=level2: %4.0f dB|name=0|min=-100|max=0|res=1|default=0
+KNOB|mix3|statement=level3: %4.0f dB|name=0|min=-100|max=0|res=1|default=0
+KNOB|mix4|statement=level4: %4.0f dB|name=0|min=-100|max=0|res=1|default=0
+PERCENTKNOB|pan1|statement=pan1: %4.0f %%|name=0|min=-100|max=100|res=1|default=0
+PERCENTKNOB|pan2|statement=pan2: %4.0f %%|name=0|min=-100|max=100|res=1|default=24
+PERCENTKNOB|pan3|statement=pan3: %4.0f %%|name=0|min=-100|max=100|res=1|default=-27
+PERCENTKNOB|pan4|statement=pan4: %4.0f %%|name=0|min=-100|max=100|res=1|default=48
+STEREOMIXER|mix|ninputs=8|time_constant=20|clipvalue=10000|processoff=0|in1=iswitch1-out|in2=iswitch2-out|in3=iswitch3-out|in4=iswitch4-out|in5=iswitch5-out|in6=iswitch6-out|in7=iswitch7-out|in8=iswitch8-out|gain1=mix1-out|gain2=mix2-out|gain3=mix3-out|gain4=mix4-out|gain5=mix5-out|gain6=mix6-out|gain7=mix7-out|gain8=mix8-out|pan1=pan1-out|pan2=pan2-out|pan3=pan3-out|pan4=pan4-out|pan5=pan5-out|pan6=pan6-out|pan7=pan7-out|pan8=pan8-out
+ISWITCH|iswitch5|numins=2|select=mode-out|in1=mshift-out5|in2=adsr:5-out
+ISWITCH|iswitch6|numins=2|select=mode-out|in1=mshift-out6|in2=adsr:6-out
+ISWITCH|iswitch7|numins=2|select=mode-out|in1=mshift-out7|in2=adsr:7-out
+ISWITCH|iswitch8|numins=2|select=mode-out|in1=mshift-out8|in2=adsr:8-out
+KNOB|mix5|statement=level5: %4.0f dB|name=0|min=-100|max=0|res=1|default=0
+KNOB|mix6|statement=level6: %4.0f dB|name=0|min=-100|max=0|res=1|default=0
+KNOB|mix7|statement=level7: %4.0f dB|name=0|min=-100|max=0|res=1|default=0
+KNOB|mix8|statement=level8: %4.0f dB|name=0|min=-100|max=0|res=1|default=0
+PERCENTKNOB|pan5|statement=pan5: %4.0f %%|name=0|min=-100|max=100|res=1|default=-54
+PERCENTKNOB|pan6|statement=pan6: %4.0f %%|name=0|min=-100|max=100|res=1|default=62
+PERCENTKNOB|pan7|statement=pan7: %4.0f %%|name=0|min=-100|max=100|res=1|default=-71
+PERCENTKNOB|pan8|statement=pan8: %4.0f %%|name=0|min=-100|max=100|res=1|default=84
+ADSR|adsr:1|in=mshift-out1|trigger=midinote-gate_mod_out1|attacktime=2.0|decaytime=5.0|decaylevel=0.75|sustaintime=20.0|sustainlevel=0.5|releasetime=25.0|retriggertime=0.0
+ADSR|adsr:2|in=mshift-out2|trigger=midinote-gate_mod_out2|attacktime=2.0|decaytime=5.0|decaylevel=0.75|sustaintime=20.0|sustainlevel=0.5|releasetime=25.0|retriggertime=0.0
+ADSR|adsr:3|in=mshift-out3|trigger=midinote-gate_mod_out3|attacktime=2.0|decaytime=5.0|decaylevel=0.75|sustaintime=20.0|sustainlevel=0.5|releasetime=25.0|retriggertime=0.0
+ADSR|adsr:4|in=mshift-out4|trigger=midinote-gate_mod_out4|attacktime=2.0|decaytime=5.0|decaylevel=0.75|sustaintime=20.0|sustainlevel=0.5|releasetime=25.0|retriggertime=0.0
+ADSR|adsr:5|in=mshift-out5|trigger=midinote-gate_mod_out5|attacktime=2.0|decaytime=5.0|decaylevel=0.75|sustaintime=20.0|sustainlevel=0.5|releasetime=25.0|retriggertime=0.0
+ADSR|adsr:6|in=mshift-out6|trigger=midinote-gate_mod_out6|attacktime=2.0|decaytime=5.0|decaylevel=0.75|sustaintime=20.0|sustainlevel=0.5|releasetime=25.0|retriggertime=0.0
+ADSR|adsr:7|in=mshift-out7|trigger=midinote-gate_mod_out7|attacktime=2.0|decaytime=5.0|decaylevel=0.75|sustaintime=20.0|sustainlevel=0.5|releasetime=25.0|retriggertime=0.0
+ADSR|adsr:8|in=mshift-out8|trigger=midinote-gate_mod_out8|attacktime=2.0|decaytime=5.0|decaylevel=0.75|sustaintime=20.0|sustainlevel=0.5|releasetime=25.0|retriggertime=0.0
+KNOB|shift:5|statement=detune5: %5.0f cnts|name=0|min=-4800.0002|max=4800.0002|res=1|default=0
+KNOB|shift:6|statement=detune6: %5.0f cnts|name=0|min=-4800.0002|max=4800.0002|res=1|default=0
+KNOB|shift:7|statement=detune7: %5.0f cnts|name=0|min=-4800.0002|max=4800.0002|res=1|default=0
+KNOB|shift:8|statement=detune8: %5.0f cnts|name=0|min=-4800.0002|max=4800.0002|res=1|default=0
+C_ADDER|c_adder:5|ninputs=3|in1=shift:5-out|in2=midinote-pitch5|in3=c_subtract:1-out
+C_ADDER|c_adder:6|ninputs=3|in1=shift:6-out|in2=midinote-pitch6|in3=c_subtract:1-out
+C_ADDER|c_adder:7|ninputs=3|in1=shift:7-out|in2=midinote-pitch7|in3=c_subtract:1-out
+C_ADDER|c_adder:8|ninputs=3|in1=shift:8-out|in2=midinote-pitch8|in3=c_subtract:1-out
+C_SWITCH|c_switch:5|ninputs=2|select=midinote-gate5|in1=adc-zero|in2=c_adder:5-out
+C_SWITCH|c_switch:6|ninputs=2|select=midinote-gate6|in1=adc-zero|in2=c_adder:6-out
+C_SWITCH|c_switch:7|ninputs=2|select=midinote-gate7|in1=adc-zero|in2=c_adder:7-out
+C_SWITCH|c_switch:8|ninputs=2|select=midinote-gate8|in1=adc-zero|in2=c_adder:8-out
+MONITOR|monitor:5|in=c_switch:5-out|statement=key5: %5.0f cnts|tag=mon
+MONITOR|monitor:6|in=c_switch:6-out|statement=key6: %5.0f cnts|tag=mon
+MONITOR|monitor:7|in=c_switch:7-out|statement=key7: %5.0f cnts|tag=mon
+MONITOR|monitor:8|in=c_switch:8-out|statement=key8: %5.0f cnts|tag=mon
+KNOB|delay:5|statement=delay5: %3.0f ms|name=0|min=0|max=600|res=1|default=0
+KNOB|delay:6|statement=delay6: %3.0f ms|name=0|min=0|max=600|res=1|default=0
+KNOB|delay:7|statement=delay7: %3.0f ms|name=0|min=0|max=600|res=1|default=0
+KNOB|delay:8|statement=delay8: %3.0f ms|name=0|min=0|max=600|res=1|default=0
+KNOB|modamt:5|statement=modamt5: %5.0f cnts|name=0|min=-2400.0001|max=2400.0001|res=1|default=0
+KNOB|modamt:6|statement=modamt6: %5.0f cnts|name=0|min=-2400.0001|max=2400.0001|res=1|default=0
+KNOB|modamt:7|statement=modamt7: %5.0f cnts|name=0|min=-2400.0001|max=2400.0001|res=1|default=0
+KNOB|modamt:8|statement=modamt8: %5.0f cnts|name=0|min=-2400.0001|max=2400.0001|res=1|default=0
+MENUPAGE|LFOmenu:1|name=LFO Values|tag=lfo|nsubuos=3|obj1=freq-obj|obj2=wave-obj|obj3=duty-obj
+TEXTKNOB|polymode|statement=polymode: %s|name=0|nchoices=4|default=1|choices1=normal|choices2=ordered|choices3=spread1|choices4=spread2
+TEXTBLOCK|textblock:1|nlines=6|text1=Before disabling|text2=ADSR, play 8 notes|text3=simultaneously.|text4=Otherwise you will|text5=hear some very low|text6=notes
+C_SUBTRACT|c_subtract:1|in1=tuner-out|in2=6000
+TAIL|factoryJVB
+--
+adc| ;=30,30,100,0
+l+r| ;=472,48,100,0
+LFOmenu| ;=480,288,100,0
+freq| ;=192,112,100,0
+duty| ;=192,288,100,0
+wave| ;=192,200,100,0
+lfo| ;=360,120,100,0
+modamt:1| ;=128,400,100,0
+modamt:2| ;=128,488,100,0
+modamt:3| ;=128,576,100,0
+modamt:4| ;=128,664,100,0
+SHIFTmenu| ;=1472,2200,100,0
+shift:1| ;=272,2992,100,0
+shift:2| ;=272,3080,100,0
+shift:3| ;=272,3168,100,0
+shift:4| ;=272,3256,100,0
+delaymenu| ;=480,1376,100,0
+delay:1| ;=128,1120,100,0
+delay:2| ;=128,1208,100,0
+delay:3| ;=128,1296,100,0
+delay:4| ;=128,1384,100,0
+midinote| ;=328,1704,100,0
+tuner| ;=272,3816,100,0
+c_adder:1| ;=656,2984,100,0
+c_adder:2| ;=656,3088,100,0
+c_adder:3| ;=656,3192,100,0
+c_adder:4| ;=656,3296,100,0
+c_switch:1| ;=1024,2200,100,0
+c_switch:2| ;=1024,2312,100,0
+c_switch:3| ;=1024,2424,100,0
+c_switch:4| ;=1024,2536,100,0
+monitor:1| ;=1240,2200,100,0
+monitor:2| ;=1240,2312,100,0
+monitor:3| ;=1240,2424,100,0
+monitor:4| ;=1240,2536,100,0
+emenu| ;=1536,1616,100,0
+mode| ;=2000,936,100,0
+iswitch1| ;=2160,32,100,0
+iswitch2| ;=2160,144,100,0
+iswitch3| ;=2160,256,100,0
+iswitch4| ;=2160,368,100,0
+calmenu| ;=1096,16,100,0
+minpitch| ;=736,24,100,0
+xfade| ;=736,120,100,0
+mshift| ;=904,232,100,0
+mmenu| ;=2632,856,100,0
+mix1| ;=2304,680,100,0
+mix2| ;=2304,768,100,0
+mix3| ;=2304,856,100,0
+mix4| ;=2304,944,100,0
+pan1| ;=2304,1384,100,0
+pan2| ;=2304,1472,100,0
+pan3| ;=2304,1560,100,0
+pan4| ;=2304,1648,100,0
+mix| ;=2632,320,100,0
+iswitch5| ;=2160,480,100,0
+iswitch6| ;=2160,592,100,0
+iswitch7| ;=2160,704,100,0
+iswitch8| ;=2160,816,100,0
+mix5| ;=2304,1032,100,0
+mix6| ;=2304,1120,100,0
+mix7| ;=2304,1208,100,0
+mix8| ;=2304,1296,100,0
+pan5| ;=2304,1736,100,0
+pan6| ;=2304,1824,100,0
+pan7| ;=2304,1912,100,0
+pan8| ;=2304,2000,100,0
+adsr:1| ;=1352,72,100,0
+adsr:2| ;=1352,280,100,0
+adsr:3| ;=1352,488,100,0
+adsr:4| ;=1352,696,100,0
+adsr:5| ;=1352,904,100,0
+adsr:6| ;=1352,1112,100,0
+adsr:7| ;=1352,1320,100,0
+adsr:8| ;=1352,1528,100,0
+shift:5| ;=272,3344,100,0
+shift:6| ;=272,3432,100,0
+shift:7| ;=272,3520,100,0
+shift:8| ;=272,3608,100,0
+c_adder:5| ;=656,3400,100,0
+c_adder:6| ;=656,3504,100,0
+c_adder:7| ;=656,3608,100,0
+c_adder:8| ;=656,3712,100,0
+c_switch:5| ;=1024,2648,100,0
+c_switch:6| ;=1024,2760,100,0
+c_switch:7| ;=1024,2872,100,0
+c_switch:8| ;=1024,2984,100,0
+monitor:5| ;=1240,2648,100,0
+monitor:6| ;=1240,2760,100,0
+monitor:7| ;=1240,2872,100,0
+monitor:8| ;=1240,2984,100,0
+delay:5| ;=128,1472,100,0
+delay:6| ;=128,1560,100,0
+delay:7| ;=128,1648,100,0
+delay:8| ;=128,1736,100,0
+modamt:5| ;=128,752,100,0
+modamt:6| ;=128,840,100,0
+modamt:7| ;=128,928,100,0
+modamt:8| ;=128,1016,100,0
+LFOmenu:1| ;=576,376,100,0
+polymode| ;=160,1864,100,0
+textblock:1| ;=912,104,100,0
+c_subtract:1| ;=400,3816,100,0
+tail|

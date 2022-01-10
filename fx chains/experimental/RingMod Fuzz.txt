@@ -1,0 +1,5 @@
+https://www.eventideaudio.com/forums/topic/pitch-tracking-ringmod-fx-chains/
+
+These FX Chains form pitch-tracking ring mods. HarModulator and Octaver generate the carrier signal, and two algorithms effect the audio signal before and after the ring mod.
+
+mp4 video: https://etide.io/6EwWN

@@ -1,0 +1,7 @@
+Modification of alg # 882 Chorusdelays2
+
+Quad mono in, quad mono out: each input feeds its delay line. Parallel delays with LFOs.
+
+SENDS: input volumes.
+
+Turn on TEMPO MODE for T_DELAY to work properly.

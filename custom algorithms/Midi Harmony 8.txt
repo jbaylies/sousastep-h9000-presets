@@ -1,0 +1,3 @@
+Modification of algorithm # 2410 Midi Harmony
+
+8 pitch shifters into a stereo mixer. Can play 8 part harmony when used with MIDI keyboard. Full ADSR. Summed in, stereo out.

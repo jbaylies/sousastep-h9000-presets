@@ -1,0 +1,165 @@
+HEADM|adc|ninputs=4|noutputs=4|name=Chorusdelays2|tag=0|nkids=6|out1=gain:6-out|out2=gain:7-out|out3=gain:8-out|out4=gain:9-out|kids1=menu1-obj|kids2=menu2-obj|kids3=menu3-obj|kids4=menu4-obj|kids5=menupage:14-obj|kids6=menupage:15-obj
+MENUPAGE|menu1|name=delay#1 params|tag=delay#1|nsubuos=9|obj1=v1-obj|obj2=dly_1-obj|obj3=dly1-obj|obj4=dpth1-obj|obj5=rate_1-obj|obj6=rate1-obj|obj7=fb1-obj|obj8=adc-nullobj|obj9=adc-nullobj
+MENUPAGE|menu2|name=delay#2 params|tag=delay#2|nsubuos=9|obj1=v2-obj|obj2=dly_2-obj|obj3=dly2-obj|obj4=dpth2-obj|obj5=rate_2-obj|obj6=rate2-obj|obj7=fb2-obj|obj8=adc-nullobj|obj9=adc-nullobj
+MENUPAGE|menu3|name=delay#3 params|tag=delay#3|nsubuos=9|obj1=v3-obj|obj2=dly_3-obj|obj3=dly3-obj|obj4=dpth3-obj|obj5=rate_3-obj|obj6=rate3-obj|obj7=fb3-obj|obj8=adc-nullobj|obj9=adc-nullobj
+MENUPAGE|menu4|name=delay#4 params|tag=delay#4|nsubuos=9|obj1=v4-obj|obj2=dly_4-obj|obj3=dly4-obj|obj4=dpth4-obj|obj5=rate_4-obj|obj6=rate4-obj|obj7=fb4-obj|obj8=adc-nullobj|obj9=adc-nullobj
+KNOB|glide|statement=glide  : %4.0f ms/sec|name=0|min=0|max=1000|res=1|default=0
+PERCENTKNOB|fb1|statement=fback :   %4.0f %%|name=0|min=-99|max=99|res=1|default=0
+PERCENTKNOB|fb2|statement=fback :   %4.0f %%|name=0|min=-99|max=99|res=1|default=0
+PERCENTKNOB|fb3|statement=fback :   %4.0f %%|name=0|min=-99|max=99|res=1|default=0
+PERCENTKNOB|fb4|statement=fback :   %4.0f %%|name=0|min=-99|max=99|res=1|default=0
+MIDICLOCK|midiclock|time_in=0.5|freq_in=2|start_in=0|stop_in=0|remote_mode=3|clock_in=1
+TEXTKNOB|dly_1|statement=t_delay: %s|name=0|nchoices=28|default=26|choices1=whole note|choices2=15/16 note|choices3=14/16 note|choices4=13/16 note|choices5=dot 1/2|choices6=11/16 note|choices7=whole trip|choices8=10/16 note|choices9=9/16 note|choices10=1/2 note|choices11=7/16 note|choices12=dot 1/4|choices13=1/2 trip|choices14=5/16 note|choices15=1/4 note|choices16=dot 1/8|choices17=1/4 trip|choices18=1/8 note|choices19=dot 1/16|choices20=1/8 trip|choices21=1/16 note|choices22=dot 1/32|choices23=1/16 trip|choices24=1/32 note|choices25=dot 1/64|choices26=1/32 trip|choices27=1/64 note|choices28=off
+TEXTKNOB|dly_2|statement=t_delay: %s|name=0|nchoices=28|default=26|choices1=whole note|choices2=15/16 note|choices3=14/16 note|choices4=13/16 note|choices5=dot 1/2|choices6=11/16 note|choices7=whole trip|choices8=10/16 note|choices9=9/16 note|choices10=1/2 note|choices11=7/16 note|choices12=dot 1/4|choices13=1/2 trip|choices14=5/16 note|choices15=1/4 note|choices16=dot 1/8|choices17=1/4 trip|choices18=1/8 note|choices19=dot 1/16|choices20=1/8 trip|choices21=1/16 note|choices22=dot 1/32|choices23=1/16 trip|choices24=1/32 note|choices25=dot 1/64|choices26=1/32 trip|choices27=1/64 note|choices28=off
+TEXTKNOB|dly_3|statement=t_delay: %s|name=0|nchoices=28|default=17|choices1=whole note|choices2=15/16 note|choices3=14/16 note|choices4=13/16 note|choices5=dot 1/2|choices6=11/16 note|choices7=whole trip|choices8=10/16 note|choices9=9/16 note|choices10=1/2 note|choices11=7/16 note|choices12=dot 1/4|choices13=1/2 trip|choices14=5/16 note|choices15=1/4 note|choices16=dot 1/8|choices17=1/4 trip|choices18=1/8 note|choices19=dot 1/16|choices20=1/8 trip|choices21=1/16 note|choices22=dot 1/32|choices23=1/16 trip|choices24=1/32 note|choices25=dot 1/64|choices26=1/32 trip|choices27=1/64 note|choices28=off
+TEXTKNOB|dly_4|statement=t_delay: %s|name=0|nchoices=28|default=17|choices1=whole note|choices2=15/16 note|choices3=14/16 note|choices4=13/16 note|choices5=dot 1/2|choices6=11/16 note|choices7=whole trip|choices8=10/16 note|choices9=9/16 note|choices10=1/2 note|choices11=7/16 note|choices12=dot 1/4|choices13=1/2 trip|choices14=5/16 note|choices15=1/4 note|choices16=dot 1/8|choices17=1/4 trip|choices18=1/8 note|choices19=dot 1/16|choices20=1/8 trip|choices21=1/16 note|choices22=dot 1/32|choices23=1/16 trip|choices24=1/32 note|choices25=dot 1/64|choices26=1/32 trip|choices27=1/64 note|choices28=off
+C_TABLE|table1|nentries=28|select=dly_1-out|in1=4000|in2=3750|in3=3500|in4=3250|in5=3000|in6=2750|in7=2666.6999|in8=2500|in9=2250|in10=2000|in11=1750|in12=1500|in13=1333.3|in14=1250|in15=1000|in16=750|in17=666.7|in18=500|in19=375|in20=333.3|in21=250|in22=187.5|in23=166.6|in24=125|in25=93.7|in26=83.3|in27=62.5|in28=0
+C_TABLE|table2|nentries=28|select=dly_2-out|in1=4000|in2=3750|in3=3500|in4=3250|in5=3000|in6=2750|in7=2666.6999|in8=2500|in9=2250|in10=2000|in11=1750|in12=1500|in13=1333.3|in14=1250|in15=1000|in16=750|in17=666.7|in18=500|in19=375|in20=333.3|in21=250|in22=187.5|in23=166.6|in24=125|in25=93.7|in26=83.3|in27=62.5|in28=0
+C_TABLE|table3|nentries=28|select=dly_3-out|in1=4000|in2=3750|in3=3500|in4=3250|in5=3000|in6=2750|in7=2666.6999|in8=2500|in9=2250|in10=2000|in11=1750|in12=1500|in13=1333.3|in14=1250|in15=1000|in16=750|in17=666.7|in18=500|in19=375|in20=333.3|in21=250|in22=187.5|in23=166.6|in24=125|in25=93.7|in26=83.3|in27=62.5|in28=0
+C_TABLE|table4|nentries=28|select=dly_4-out|in1=4000|in2=3750|in3=3500|in4=3250|in5=3000|in6=2750|in7=2666.6999|in8=2500|in9=2250|in10=2000|in11=1750|in12=1500|in13=1333.3|in14=1250|in15=1000|in16=750|in17=666.7|in18=500|in19=375|in20=333.3|in21=250|in22=187.5|in23=166.6|in24=125|in25=93.7|in26=83.3|in27=62.5|in28=0
+C_MULTIPLY|math1|in1=table1-out|in2=midiclock-time_out
+C_MULTIPLY|math2|in1=table2-out|in2=midiclock-time_out
+C_MULTIPLY|math3|in1=table3-out|in2=midiclock-time_out
+C_MULTIPLY|math4|in1=table4-out|in2=midiclock-time_out
+SKNOB3|dly1|statement=delay  : %4.0f ms|name=0|type=0|res=1|default=37.4994|ctrlin=dly1-out|min=0|max=2000|merge=math1-out
+SKNOB3|dly2|statement=delay  : %4.0f ms|name=0|type=0|res=1|default=37.4994|ctrlin=dly2-out|min=0|max=2000|merge=math2-out
+SKNOB3|dly3|statement=delay  : %4.0f ms|name=0|type=0|res=1|default=299.9954|ctrlin=dly3-out|min=0|max=2000|merge=math3-out
+SKNOB3|dly4|statement=delay  : %4.0f ms|name=0|type=0|res=1|default=299.9954|ctrlin=dly4-out|min=0|max=2000|merge=math4-out
+KNOB|dpth1|statement=depth :  %4.1f ms|name=0|min=0|max=2000|res=0.1|default=2
+KNOB|dpth2|statement=depth :  %4.1f ms|name=0|min=0|max=2000|res=0.1|default=1.8
+KNOB|dpth3|statement=depth :  %4.1f ms|name=0|min=0|max=2000|res=0.1|default=1.7
+KNOB|dpth4|statement=depth :  %4.1f ms|name=0|min=0|max=2000|res=0.1|default=1.5
+TEXTKNOB|rate_1|statement=t_rate: %s|name=0|nchoices=28|default=0|choices1=whole note|choices2=15/16 note|choices3=14/16 note|choices4=13/16 note|choices5=dot 1/2|choices6=11/16 note|choices7=whole trip|choices8=10/16 note|choices9=9/16 note|choices10=1/2 note|choices11=7/16 note|choices12=dot 1/4|choices13=1/2 trip|choices14=5/16 note|choices15=1/4 note|choices16=dot 1/8|choices17=1/4 trip|choices18=1/8 note|choices19=dot 1/16|choices20=1/8 trip|choices21=1/16 note|choices22=dot 1/32|choices23=1/16 trip|choices24=1/32 note|choices25=dot 1/64|choices26=1/32 trip|choices27=1/64 note|choices28=off
+TEXTKNOB|rate_2|statement=t_rate: %s|name=0|nchoices=28|default=1|choices1=whole note|choices2=15/16 note|choices3=14/16 note|choices4=13/16 note|choices5=dot 1/2|choices6=11/16 note|choices7=whole trip|choices8=10/16 note|choices9=9/16 note|choices10=1/2 note|choices11=7/16 note|choices12=dot 1/4|choices13=1/2 trip|choices14=5/16 note|choices15=1/4 note|choices16=dot 1/8|choices17=1/4 trip|choices18=1/8 note|choices19=dot 1/16|choices20=1/8 trip|choices21=1/16 note|choices22=dot 1/32|choices23=1/16 trip|choices24=1/32 note|choices25=dot 1/64|choices26=1/32 trip|choices27=1/64 note|choices28=off
+TEXTKNOB|rate_3|statement=t_rate: %s|name=0|nchoices=28|default=2|choices1=whole note|choices2=15/16 note|choices3=14/16 note|choices4=13/16 note|choices5=dot 1/2|choices6=11/16 note|choices7=whole trip|choices8=10/16 note|choices9=9/16 note|choices10=1/2 note|choices11=7/16 note|choices12=dot 1/4|choices13=1/2 trip|choices14=5/16 note|choices15=1/4 note|choices16=dot 1/8|choices17=1/4 trip|choices18=1/8 note|choices19=dot 1/16|choices20=1/8 trip|choices21=1/16 note|choices22=dot 1/32|choices23=1/16 trip|choices24=1/32 note|choices25=dot 1/64|choices26=1/32 trip|choices27=1/64 note|choices28=off
+TEXTKNOB|rate_4|statement=t_rate: %s|name=0|nchoices=28|default=3|choices1=whole note|choices2=15/16 note|choices3=14/16 note|choices4=13/16 note|choices5=dot 1/2|choices6=11/16 note|choices7=whole trip|choices8=10/16 note|choices9=9/16 note|choices10=1/2 note|choices11=7/16 note|choices12=dot 1/4|choices13=1/2 trip|choices14=5/16 note|choices15=1/4 note|choices16=dot 1/8|choices17=1/4 trip|choices18=1/8 note|choices19=dot 1/16|choices20=1/8 trip|choices21=1/16 note|choices22=dot 1/32|choices23=1/16 trip|choices24=1/32 note|choices25=dot 1/64|choices26=1/32 trip|choices27=1/64 note|choices28=off
+C_TABLE|table5|nentries=28|select=rate_1-out|in1=0.25|in2=0.2667|in3=0.2875|in4=0.3077|in5=0.3333|in6=0.3636|in7=0.375|in8=0.4|in9=0.4444|in10=0.5|in11=0.5714|in12=0.6667|in13=0.75|in14=0.8|in15=1|in16=1.3333|in17=1.5|in18=2|in19=2.6667|in20=3.0003|in21=4|in22=5.3333|in23=6.0026|in24=8|in25=10.6736|in26=12.0051|in27=16|in28=0
+C_TABLE|table6|nentries=28|select=rate_2-out|in1=0.25|in2=0.2667|in3=0.2875|in4=0.3077|in5=0.3333|in6=0.3636|in7=0.375|in8=0.4|in9=0.4444|in10=0.5|in11=0.5714|in12=0.6667|in13=0.75|in14=0.8|in15=1|in16=1.3333|in17=1.5|in18=2|in19=2.6667|in20=3.0003|in21=4|in22=5.3333|in23=6.0026|in24=8|in25=10.6736|in26=12.0051|in27=16|in28=0
+C_TABLE|table7|nentries=28|select=rate_3-out|in1=0.25|in2=0.2667|in3=0.2875|in4=0.3077|in5=0.3333|in6=0.3636|in7=0.375|in8=0.4|in9=0.4444|in10=0.5|in11=0.5714|in12=0.6667|in13=0.75|in14=0.8|in15=1|in16=1.3333|in17=1.5|in18=2|in19=2.6667|in20=3.0003|in21=4|in22=5.3333|in23=6.0026|in24=8|in25=10.6736|in26=12.0051|in27=16|in28=0
+C_TABLE|table8|nentries=28|select=rate_4-out|in1=0.25|in2=0.2667|in3=0.2875|in4=0.3077|in5=0.3333|in6=0.3636|in7=0.375|in8=0.4|in9=0.4444|in10=0.5|in11=0.5714|in12=0.6667|in13=0.75|in14=0.8|in15=1|in16=1.3333|in17=1.5|in18=2|in19=2.6667|in20=3.0003|in21=4|in22=5.3333|in23=6.0026|in24=8|in25=10.6736|in26=12.0051|in27=16|in28=0
+C_MULTIPLY|math5|in1=table5-out|in2=midiclock-freq_out
+C_MULTIPLY|math6|in1=table6-out|in2=midiclock-freq_out
+C_MULTIPLY|math7|in1=table7-out|in2=midiclock-freq_out
+C_MULTIPLY|math8|in1=table8-out|in2=midiclock-freq_out
+SKNOB3|rate1|statement=rate  : %6.2f Hz|name=0|type=0|res=0.01|default=0.4167|ctrlin=rate1-out|min=0|max=300|merge=math5-out
+SKNOB3|rate2|statement=rate  : %6.2f Hz|name=0|type=0|res=0.01|default=0.4445|ctrlin=rate2-out|min=0|max=300|merge=math6-out
+SKNOB3|rate3|statement=rate  : %6.2f Hz|name=0|type=0|res=0.01|default=0.4791|ctrlin=rate3-out|min=0|max=300|merge=math7-out
+SKNOB3|rate4|statement=rate  : %6.2f Hz|name=0|type=0|res=0.01|default=0.5128|ctrlin=rate4-out|min=0|max=300|merge=math8-out
+LFO|lfo1|mod=adc-null|freq=rate1-out|modamt=0|wave=0|dutycycle=0|polarity=0
+LFO|lfo2|mod=adc-null|freq=rate2-out|modamt=0|wave=0|dutycycle=0|polarity=0
+LFO|lfo3|mod=adc-null|freq=rate3-out|modamt=0|wave=0|dutycycle=0|polarity=0
+LFO|lfo4|mod=adc-null|freq=rate4-out|modamt=0|wave=0|dutycycle=0|polarity=0
+MIX|feed1|time_constant=20|clipvalue=1|in1=gain:2-out|in2=delay1-out|amp1=1|amp2=fb1-out
+MODDELAY|delay1|maxdelay=2000|declick=1|in=feed1-out|mod=lfo1-out|delayamt=dly1-out|modamt=dpth1-out|glidespeed=glide-out
+MIX|feed2|time_constant=20|clipvalue=1|in1=gain:3-out|in2=delay2-out|amp1=1|amp2=fb2-out
+MODDELAY|delay2|maxdelay=2000|declick=1|in=feed2-out|mod=lfo2-out|delayamt=dly2-out|modamt=dpth2-out|glidespeed=glide-out
+MIX|feed3|time_constant=20|clipvalue=1|in1=gain:4-out|in2=delay3-out|amp1=1|amp2=fb3-out
+MODDELAY|delay3|maxdelay=2000|declick=1|in=feed3-out|mod=lfo3-out|delayamt=dly3-out|modamt=dpth3-out|glidespeed=glide-out
+MIX|feed4|time_constant=20|clipvalue=1|in1=gain:5-out|in2=delay4-out|amp1=1|amp2=fb4-out
+MODDELAY|delay4|maxdelay=2000|declick=1|in=feed4-out|mod=lfo4-out|delayamt=dly4-out|modamt=dpth4-out|glidespeed=glide-out
+KNOB|v1|statement=level  : %4.0f dB|name=0|min=-100|max=0|res=1|default=0
+KNOB|v2|statement=level  : %4.0f dB|name=0|min=-100|max=0|res=1|default=0
+KNOB|v3|statement=level  : %4.0f dB|name=0|min=-100|max=0|res=1|default=-3
+KNOB|v4|statement=level  : %4.0f dB|name=0|min=-100|max=0|res=1|default=-3
+MENUPAGE|menupage:14|name=sends|tag=0|nsubuos=4|obj1=percentknob:1-obj|obj2=percentknob:2-obj|obj3=percentknob:3-obj|obj4=percentknob:4-obj
+PERCENTKNOB|percentknob:1|statement=One: %3.1f%%|name=Send One|min=0|max=100|res=.1|default=0
+PERCENTKNOB|percentknob:2|statement=Two: %3.1f%%|name=Send Two|min=0|max=100|res=.1|default=0
+PERCENTKNOB|percentknob:3|statement=Three: %3.1f%%|name=Send Three|min=0|max=100|res=.1|default=0
+PERCENTKNOB|percentknob:4|statement=Four: %3.1f%%|name=Send Four|min=0|max=100|res=.1|default=0
+C_LIN2DB|c_lin2db:1|linvalue=percentknob:1-out
+GAIN|gain:2|clipvalue=10000|in=adc-in1|gain=c_lin2db:1-dbvalue
+C_LIN2DB|c_lin2db:2|linvalue=percentknob:2-out
+GAIN|gain:3|clipvalue=10000|in=adc-in2|gain=c_lin2db:2-dbvalue
+C_LIN2DB|c_lin2db:3|linvalue=percentknob:3-out
+GAIN|gain:4|clipvalue=10000|in=adc-in3|gain=c_lin2db:3-dbvalue
+C_LIN2DB|c_lin2db:4|linvalue=percentknob:4-out
+GAIN|gain:5|clipvalue=10000|in=adc-in4|gain=c_lin2db:4-dbvalue
+GAIN|gain:6|clipvalue=10000|in=delay1-out|gain=v1-out
+GAIN|gain:7|clipvalue=10000|in=delay2-out|gain=v2-out
+GAIN|gain:8|clipvalue=10000|in=delay3-out|gain=v3-out
+GAIN|gain:9|clipvalue=10000|in=delay4-out|gain=v4-out
+MENUPAGE|menupage:15|name=moddelay glide|tag=0|nsubuos=1|obj1=glide-obj
+TAIL|sdg
+--
+adc| ;=30,30,100,0
+menu1| ;=880,1740,100,0
+menu2| ;=880,2520,100,0
+menu3| ;=460,3160,100,0
+menu4| ;=460,3760,100,0
+glide| ;=1064,864,100,0
+fb1| ;=496,192,100,0
+fb2| ;=496,312,100,0
+fb3| ;=496,432,100,0
+fb4| ;=496,536,100,0
+midiclock| ;=88,2808,100,0
+dly_1| ;=740,1740,100,0
+dly_2| ;=740,2400,100,0
+dly_3| ;=320,3040,100,0
+dly_4| ;=320,4000,100,0
+table1| ;=880,1980,100,0
+table2| ;=880,2400,100,0
+table3| ;=460,3040,100,0
+table4| ;=460,4000,100,0
+math1| ;=1020,1980,100,0
+math2| ;=1020,2100,100,0
+math3| ;=600,3040,100,0
+math4| ;=600,4000,100,0
+dly1| ;=928,224,100,0
+dly2| ;=928,352,100,0
+dly3| ;=928,480,100,0
+dly4| ;=928,608,100,0
+dpth1| ;=1480,80,100,0
+dpth2| ;=1480,176,100,0
+dpth3| ;=1480,272,100,0
+dpth4| ;=1480,368,100,0
+rate_1| ;=740,3300,100,0
+rate_2| ;=740,3180,100,0
+rate_3| ;=320,4840,100,0
+rate_4| ;=320,4120,100,0
+table5| ;=880,3020,100,0
+table6| ;=880,3180,100,0
+table7| ;=460,4840,100,0
+table8| ;=128,4256,100,0
+math5| ;=1020,2220,100,0
+math6| ;=1020,3180,100,0
+math7| ;=600,4840,100,0
+math8| ;=600,4120,100,0
+rate1| ;=352,1096,100,0
+rate2| ;=352,1224,100,0
+rate3| ;=352,1352,100,0
+rate4| ;=352,1480,100,0
+lfo1| ;=712,608,100,0
+lfo2| ;=712,776,100,0
+lfo3| ;=712,944,100,0
+lfo4| ;=712,1112,100,0
+feed1| ;=704,56,100,0
+delay1| ;=1200,112,100,0
+feed2| ;=704,368,100,0
+delay2| ;=1200,256,100,0
+feed3| ;=880,824,100,0
+delay3| ;=1200,400,100,0
+feed4| ;=880,1128,100,0
+delay4| ;=1200,544,100,0
+v1| ;=744,1528,100,0
+v2| ;=520,2112,100,0
+v3| ;=320,3160,100,0
+v4| ;=320,3880,100,0
+menupage:14| ;=368,480,100,0
+percentknob:1| ;=16,640,100,0
+percentknob:2| ;=16,736,100,0
+percentknob:3| ;=16,832,100,0
+percentknob:4| ;=16,928,100,0
+c_lin2db:1| ;=136,272,100,0
+gain:2| ;=376,64,100,0
+c_lin2db:2| ;=136,376,100,0
+gain:3| ;=376,168,100,0
+c_lin2db:3| ;=136,472,100,0
+gain:4| ;=376,264,100,0
+c_lin2db:4| ;=136,576,100,0
+gain:5| ;=376,368,100,0
+gain:6| ;=1920,600,100,0
+gain:7| ;=1920,704,100,0
+gain:8| ;=1920,800,100,0
+gain:9| ;=1920,904,100,0
+menupage:15| ;=1176,880,100,0
+tail|
